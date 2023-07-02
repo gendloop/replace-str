@@ -42,7 +42,7 @@ runs:
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git pull
-        $replace_pl = "${{ github.action_path }}\docs\replace.pl"
+        $replace_pl = "${{ github.action_path }}/docs/replace.pl"
         perl "$replace_pl" ${{ inputs.path-to-replace }} ${{ inputs.replace-to-path }} ${{ inputs.str-to-replace }} ${{ inputs.replace-to-str }}
         git add .
         (git commit -m "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` ") || true
