@@ -1,21 +1,28 @@
-name: action-name
+name: replace-str
 author: gendloop
-description: 'action description'
+description: 'Replace string in file'
 inputs:
 # Required
-  version:
-    description: 'New version. e.g. v0.0.0'
-    required: true
-    default: 'v0.0.0'
   token:
     description: 'Personal token'
     required: true
     default: ${{ github.token }}
-# Optional
-  branch:
-    description: 'branch'
-    required: false
-    default: main
+  path-to-replace:
+    description: 'File path to replace'
+    required: true
+    default: ""
+  replace-to-path:
+    description: 'Replace to file path'
+    required: true
+    default: ""
+  str-to-replace:
+    description: 'String to replace'
+    required: true
+    default: ""
+  replace-to-str:
+    description: 'Replace to string'
+    required: true
+    default: ""
 
 runs:
   using: 'composite'
@@ -26,43 +33,17 @@ runs:
         token: ${{ inputs.token }}
         fetch-depth: 0
 
-    - name: setup-node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16.x
-      
-    - name: add-release-log
-      shell: bash
-      run: npx changelogithub
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-
-    - name: cmd
-      shell: bash
+    - name: replace-str
+      shell: pwsh
       working-directory: ${{ github.workspace }}
       env:
           GITHUB_TOKEN: ${{ inputs.token }}
       run: |
-        git config --global user.name "$GITHUB_ACTOR"
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        git checkout ${{ inputs.branch }}
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git pull
-        repo_name=${GITHUB_REPOSITORY#*/}
-        version=${{ inputs.version }}
-        echo $repo_name
-        echo $version
-        if [[ ${version} =~ ^v(.*)\.(.*)\.(.*) ]] 
-        then
-          major=${BASH_REMATCH[1]}
-          minor=${BASH_REMATCH[2]}
-          patch=${BASH_REMATCH[3]}
-        fi
-        echo $major $minor $patch
-        echo "" > config.txt
-        echo "PROJECT_NAME=${repo_name}" >> config.txt
-        echo "${repo_name}_VERSION_MAJOR=${major}" >> config.txt
-        echo "${repo_name}_VERSION_MINOR=${minor}" >> config.txt
-        echo "${repo_name}_VERSION_PATCH=${patch}" >> config.txt
+        $replace_pl = "${{ github.action_path }}\docs\replace.pl"
+        perl "$replace_pl" ${{ inputs.path-to-replace }} ${{ inputs.replace-to-path }} ${{ str-to-replace }} ${{ replace-to-str }}
         git add .
-        (git commit -m "chore: release VERSION ${{ inputs.version }} ") || true
+        (git commit -m "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` ") || true
         (git push) || true

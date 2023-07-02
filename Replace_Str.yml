@@ -1,0 +1,59 @@
+name: Replace_Str
+
+permissions:
+  contents: write
+  actions: write
+
+on: 
+  workflow_dispatch:
+    inputs:
+      path-to-replace:
+      description: 'File path to replace'
+      required: true
+      default: ""
+    replace-to-path:
+      description: 'Replace to file path'
+      required: true
+      default: ""
+    str-to-replace:
+      description: 'String to replace'
+      required: true
+      default: ""
+    replace-to-str:
+      description: 'Replace to string'
+      required: true
+      default: ""
+  workflow_call:
+    inputs:
+      path-to-replace:
+      description: 'File path to replace'
+      required: true
+      default: ""
+    replace-to-path:
+      description: 'Replace to file path'
+      required: true
+      default: ""
+    str-to-replace:
+      description: 'String to replace'
+      required: true
+      default: ""
+    replace-to-str:
+      description: 'Replace to string'
+      required: true
+      default: ""
+    
+
+jobs:
+  replace_str:
+    runs-on: ubuntu-latest
+    steps:
+      - name: replace-str
+        uses: gendloop/replace-str@main
+        with: 
+          token: ${{ github.token }}
+          path-to-replace: ${{ inputs.path-to-replace }}
+          replace-to-path: ${{ inputs.replace-to-path }}
+          str-to-replace: ${{ inputs.str-to-replace }}
+          replace-to-str: ${{ inputs.replace-to-str }}
+
+      
