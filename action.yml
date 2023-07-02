@@ -45,5 +45,5 @@ runs:
         ls ${{ github.action_path }}/docs
         perl ${{ github.action_path }}/docs/replace.pl "${{ inputs.path-to-replace }}" "${{ inputs.replace-to-path }}" "${{ inputs.str-to-replace }}" "${{ inputs.replace-to-str }}"
         git add .
-        (git commit -m "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` .") || true
+        (git commit -m "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` ") || true
         (git push) || true
