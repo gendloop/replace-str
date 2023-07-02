@@ -8,39 +8,43 @@ on:
   workflow_dispatch:
     inputs:
       path-to-replace:
-      description: 'File path to replace'
-      required: true
-      default: ""
-    replace-to-path:
-      description: 'Replace to file path'
-      required: true
-      default: ""
-    str-to-replace:
-      description: 'String to replace'
-      required: true
-      default: ""
-    replace-to-str:
-      description: 'Replace to string'
-      required: true
-      default: ""
+        description: 'File path to replace'
+        required: true
+        default: ""
+      replace-to-path:
+        description: 'Replace to file path'
+        required: true
+        default: ""
+      str-to-replace:
+        description: 'String to replace'
+        required: true
+        default: ""
+      replace-to-str:
+        description: 'Replace to string'
+        required: true
+        default: ""
   workflow_call:
     inputs:
       path-to-replace:
-      description: 'File path to replace'
-      required: true
-      default: ""
-    replace-to-path:
-      description: 'Replace to file path'
-      required: true
-      default: ""
-    str-to-replace:
-      description: 'String to replace'
-      required: true
-      default: ""
-    replace-to-str:
-      description: 'Replace to string'
-      required: true
-      default: ""
+        description: 'File path to replace'
+        type: string
+        required: true
+        default: ""
+      replace-to-path:
+        description: 'Replace to file path'
+        type: string
+        required: true
+        default: ""
+      str-to-replace:
+        description: 'String to replace'
+        type: string
+        required: true
+        default: ""
+      replace-to-str:
+        description: 'Replace to string'
+        type: string
+        required: true
+        default: ""
     
 
 jobs:
