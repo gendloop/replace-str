@@ -31,7 +31,6 @@ runs:
       uses: actions/checkout@v3
       with: 
         token: ${{ inputs.token }}
-        fetch-depth: 0
 
     - name: replace-str
       shell: bash
@@ -39,11 +38,11 @@ runs:
       env:
           GITHUB_TOKEN: ${{ inputs.token }}
       run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git pull
         ls ${{ github.action_path }}/docs
         perl ${{ github.action_path }}/docs/replace.pl "${{ inputs.path-to-replace }}" "${{ inputs.replace-to-path }}" "${{ inputs.str-to-replace }}" "${{ inputs.replace-to-str }}"
-        git add .
-        (git commit -m "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` ") || true
-        (git push) || true
+
+    - name: git-push
+      uses: gendloop/git-push@main
+      with:
+        token: ${{ github.token }}
+        commit: "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` "
