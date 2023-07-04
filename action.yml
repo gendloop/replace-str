@@ -45,4 +45,4 @@ runs:
       uses: gendloop/git-push@main
       with:
         token: ${{ github.token }}
-        commit: "chore: replace \`${{ inputs.str-to-replace }}\`  in \`${{ inputs.path-to-replace }}\` to \`${{ inputs.replace-to-str }}\` in \`${{ inputs.replace-to-path }}\` "
+        commit: "chore: replace `${{ inputs.str-to-replace }}` in `${{ inputs.path-to-replace }}` to `${{ inputs.replace-to-str }}` in `${{ inputs.replace-to-path }}` "
