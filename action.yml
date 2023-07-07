@@ -32,6 +32,11 @@ runs:
       with: 
         token: ${{ inputs.token }}
 
+    - name: git-pull
+      shell: bash
+      run: |
+        git pull
+
     - name: replace-str
       shell: bash
       working-directory: ${{ github.workspace }}
