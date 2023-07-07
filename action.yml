@@ -39,7 +39,7 @@ runs:
           GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         ls ${{ github.action_path }}/docs
-        perl ${{ github.action_path }}/docs/replace.pl "${{ inputs.path-to-replace }}" "${{ inputs.replace-to-path }}" "${{ inputs.str-to-replace }}" "${{ inputs.replace-to-str }}"
+        perl "${{ github.action_path }}/docs/replace.pl" "${{ inputs.path-to-replace }}" "${{ inputs.replace-to-path }}" "${{ inputs.str-to-replace }}" "${{ inputs.replace-to-str }}"
 
     - name: git-push
       uses: gendloop/git-push@main
