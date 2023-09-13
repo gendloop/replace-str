@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: replace-str
-        uses: gendloop/replace-str@main
+        uses: gendloop/replace-str@v1.0.1
         with: 
           token: ${{ github.token }}
           path-to-replace: ${{ inputs.path-to-replace }}
