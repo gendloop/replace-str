@@ -47,7 +47,7 @@ runs:
         perl "${{ github.action_path }}/docs/replace.pl" "${{ inputs.path-to-replace }}" "${{ inputs.replace-to-path }}" "${{ inputs.str-to-replace }}" "${{ inputs.replace-to-str }}"
 
     - name: git-push
-      uses: gendloop/git-push@main
+      uses: gendloop/git-push@v1.0.0
       with:
         token: ${{ github.token }}
         commit: "chore: replace \\`${{ inputs.str-to-replace }}\\` in \\`${{ inputs.path-to-replace }}\\` to \\`${{ inputs.replace-to-str }}\\` in \\`${{ inputs.replace-to-path }}\\` "
