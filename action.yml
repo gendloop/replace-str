@@ -29,7 +29,7 @@ runs:
   steps:
     - name: checkout-repo
       uses: actions/checkout@v3
-      with: 
+      with:
         token: ${{ inputs.token }}
 
     - name: git-pull
